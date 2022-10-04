@@ -7,9 +7,14 @@ import 'package:homeopathic_admin/UI/Homeopathic/HomeoBlogs.dart';
 import 'package:homeopathic_admin/UI/authpages/login.dart';
 import 'package:provider/provider.dart';
 
-class Dashbord extends StatelessWidget {
+class Dashbord extends StatefulWidget {
   const Dashbord({super.key});
 
+  @override
+  State<Dashbord> createState() => _DashbordState();
+}
+
+class _DashbordState extends State<Dashbord> {
   @override
   Widget build(BuildContext context) {
     return Consumer<DataProvider>(
@@ -58,9 +63,7 @@ class Dashbord extends StatelessWidget {
                         ));
                   },
                 ),
-                SizedBox(
-                  width: 10
-                ),
+                SizedBox(width: 10),
                 ElevatedButton.icon(
                   icon: Icon(Icons.medical_information),
                   label: Text("Allopathic"),
@@ -81,9 +84,7 @@ class Dashbord extends StatelessWidget {
                   style: Utils.mybutton(context: context),
                   onPressed: () {},
                 ),
-                SizedBox(
-                  width: 10
-                ),
+                SizedBox(width: 10),
                 ElevatedButton.icon(
                   icon: Icon(Icons.logout),
                   label: Text("Signout"),

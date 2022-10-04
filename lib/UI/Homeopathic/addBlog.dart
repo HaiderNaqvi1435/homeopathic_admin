@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
@@ -30,9 +31,9 @@ class _NewBlogState extends State<NewBlog> {
                 RemedyData remedyData = RemedyData(
                   remedy: remdycont.text,
                   materia: materiaValue,
+                  userID: FirebaseAuth.instance.currentUser!.uid,
                   discrp: jsonEncode(quillcont.document.toDelta().toJson()),
                 );
-
                 try {
                   await FirebaseFirestore.instance
                       .collection("Remedies")
@@ -44,6 +45,8 @@ class _NewBlogState extends State<NewBlog> {
                   print("Something went wrong");
                   print(e);
                 }
+
+                data.loadremedy();
               },
               icon: Icon(Icons.done),
             )
