@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "989251133769",
+    "project_id": "blogs-6b908",
+    "storage_bucket": "blogs-6b908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989251133769:android:70137439111d6201d23a98",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989251133769-ocgebjb83l13dkmuvcsu2kvg8hjdgklk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqx0_wWxncCh3KwgjWIkqAXaBMEp2XYAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989251133769-ocgebjb83l13dkmuvcsu2kvg8hjdgklk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989251133769:android:2cabb523622cad59d23a98",
+        "android_client_info": {
+          "package_name": "com.example.homeopathic_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989251133769-ocgebjb83l13dkmuvcsu2kvg8hjdgklk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqx0_wWxncCh3KwgjWIkqAXaBMEp2XYAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989251133769-ocgebjb83l13dkmuvcsu2kvg8hjdgklk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989251133769:android:39d8f1f8d0853adcd23a98",
+        "android_client_info": {
+          "package_name": "com.example.homeopathic_blogs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "989251133769-ocgebjb83l13dkmuvcsu2kvg8hjdgklk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqx0_wWxncCh3KwgjWIkqAXaBMEp2XYAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "989251133769-ocgebjb83l13dkmuvcsu2kvg8hjdgklk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
