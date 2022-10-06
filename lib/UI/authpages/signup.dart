@@ -61,29 +61,51 @@ class _SignupState extends State<Signup> {
             controller: password,
             text: 'Password',
           ),
-          SizedBox(
-            height: 60,
-            child: IntlPhoneField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(
-                    15,
-                  ),
+          SizedBox(height: 10),
+          IntlPhoneField(
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              isDense: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  15,
                 ),
-                filled: true,
-                fillColor: Colors.white,
-                labelText: 'Phone Number',
               ),
-              onChanged: (phone) {
-                setState(() {
-                  phoneno = phone.toString();
-                });
-              },
-              onCountryChanged: (country) {
-                print('Country changed to: ' + country.name);
-              },
+              filled: true,
+              fillColor: Colors.white,
+              labelText: 'Phone Number',
             ),
+            initialCountryCode: 'PK',
+            onChanged: (phone) {
+              setState(() {
+                phoneno = phone.completeNumber;
+              });
+              print(phone.completeNumber);
+            },
           ),
+
+          // child: IntlPhoneField(
+          //   decoration: InputDecoration(
+          //     border: OutlineInputBorder(
+          //       borderRadius: BorderRadius.circular(
+          //         15,
+          //       ),
+          //     ),
+          //     filled: true,
+          //     fillColor: Colors.white,
+          //     labelText: 'Phone Number',
+          //   ),
+          //   onChanged: (phone) {
+          //     setState(() {
+          //       phoneno = phone.toString();
+          //       print(phoneno);
+          //     });
+          //   },
+          //   onCountryChanged: (country) {
+          //     print('Country changed to: ' + country.name);
+          //   },
+          // ),
+
           SizedBox(
             width: 150,
             child: ElevatedButton(

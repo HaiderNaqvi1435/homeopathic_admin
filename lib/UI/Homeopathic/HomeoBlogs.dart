@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homeopathic_admin/Core/DataProviders/DataProvider.dart';
 import 'package:homeopathic_admin/UI/Homeopathic/addBlog.dart';
+import 'package:homeopathic_admin/UI/Homeopathic/viewBlog.dart';
 import 'package:provider/provider.dart';
 
 class HomeoBlogs extends StatefulWidget {
@@ -25,6 +26,14 @@ class _HomeoBlogsState extends State<HomeoBlogs> {
                 itemCount: data.remedylist.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Remedydetails(
+                                remedyData: data.remedylist[index]),
+                          ));
+                    },
                     title: Text(data.remedylist[index].remedy!),
                     subtitle: Text(data.remedylist[index].materia!),
                   );
