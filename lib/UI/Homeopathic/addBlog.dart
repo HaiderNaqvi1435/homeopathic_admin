@@ -10,12 +10,26 @@ import 'package:homeopathic_admin/Core/Models/RemedyData.dart';
 import 'package:provider/provider.dart';
 
 class NewBlog extends StatefulWidget {
-  NewBlog({Key? key}) : super(key: key);
+  NewBlog({Key? key, this.remedyData}) : super(key: key);
+  RemedyData? remedyData;
   @override
   State<NewBlog> createState() => _NewBlogState();
 }
 
 class _NewBlogState extends State<NewBlog> {
+  @override
+  void initState() {
+    if (widget.remedyData != null) {
+      quillcont = QuillController(
+          document: Document.fromJson(jsonDecode(widget.remedyData!.discrp)),
+          selection: TextSelection.collapsed(offset: 0));
+      remdycont.text = widget.remedyData!.remedy!;
+      materiaValue = widget.remedyData!.materia;
+    }
+    // TODO: implement initState
+    super.initState();
+  }
+
   ScrollController scrollController = ScrollController();
   QuillController quillcont = QuillController.basic();
   TextEditingController remdycont = TextEditingController();
@@ -28,19 +42,37 @@ class _NewBlogState extends State<NewBlog> {
           actions: [
             IconButton(
               onPressed: () async {
-                RemedyData remedyData = RemedyData(
-                  remedy: remdycont.text,
-                  materia: materiaValue,
-                  userID: FirebaseAuth.instance.currentUser!.uid,
-                  discrp: jsonEncode(quillcont.document.toDelta().toJson()),
-                );
                 try {
-                  await FirebaseFirestore.instance
-                      .collection("Remedies")
-                      .add(remedyData.toMap())
-                      .then((value) {
-                    print("Uploaded Succesfull");
-                  });
+                  if (widget.remedyData == null) {
+                    RemedyData remedyData = RemedyData(
+                      remedy: remdycont.text,
+                      materia: materiaValue,
+                      userID: FirebaseAuth.instance.currentUser!.uid,
+                      discrp: jsonEncode(quillcont.document.toDelta().toJson()),
+                    );
+
+                    await FirebaseFirestore.instance
+                        .collection("Remedies")
+                        .add(remedyData.toMap())
+                        .then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Blog Uploaded!")));
+                      print("Uploaded Succesfull");
+                    });
+                  } else {
+                    widget.remedyData!.discrp =
+                        jsonEncode(quillcont.document.toDelta().toJson());
+                    widget.remedyData!.materia = materiaValue;
+                    widget.remedyData!.remedy = remdycont.text;
+
+                    widget.remedyData!.reff!
+                        .set(widget.remedyData!.toMap())
+                        .then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Blog Updated!")));
+                      print("Uploaded Succesfull");
+                    });
+                  }
                 } catch (e) {
                   print("Something went wrong");
                   print(e);

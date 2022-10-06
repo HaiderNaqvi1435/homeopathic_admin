@@ -5,10 +5,11 @@ import 'package:homeopathic_admin/Core/DataProviders/DataProvider.dart';
 import 'package:homeopathic_admin/Core/ThemeData/Utils.dart';
 import 'package:homeopathic_admin/UI/Homeopathic/HomeoBlogs.dart';
 import 'package:homeopathic_admin/UI/authpages/login.dart';
+import 'package:homeopathic_admin/UI/authpages/profile.dart';
 import 'package:provider/provider.dart';
 
 class Dashbord extends StatefulWidget {
-  const Dashbord({super.key});
+  Dashbord({super.key});
 
   @override
   State<Dashbord> createState() => _DashbordState();
@@ -26,9 +27,22 @@ class _DashbordState extends State<Dashbord> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 15,
+                    color: Colors.black,
+                    spreadRadius: 2,
+                  )
+                ],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+                color: Colors.blue,
+              ),
               width: double.maxFinite,
               height: MediaQuery.of(context).size.height / 4,
-              color: Colors.blue,
               child: Padding(
                 padding: const EdgeInsets.only(left: 36.0, top: 16),
                 child: Column(
@@ -40,14 +54,14 @@ class _DashbordState extends State<Dashbord> {
                       style: TextStyle(fontSize: 22, color: Colors.white),
                     ),
                     Text(
-                      data.userData.cnic ?? "",
+                      data.userData.cnic ?? data.userData.name!,
                       style: TextStyle(fontSize: 14, color: Colors.white),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).size.height / 6),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -82,7 +96,13 @@ class _DashbordState extends State<Dashbord> {
                   icon: Icon(Icons.person),
                   label: Text("Profile"),
                   style: Utils.mybutton(context: context),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Profile(),
+                        ));
+                  },
                 ),
                 SizedBox(width: 10),
                 ElevatedButton.icon(

@@ -21,12 +21,12 @@ class Login extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 150,
-                width: 150,
-                // child: Image.asset(
-                //   'assert/auth.png',
-                // ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 3,
+                width: double.maxFinite,
+                child: Image.asset(
+                  'assets/login1.png',
+                ),
               ),
               const SizedBox(
                 height: 32,
@@ -55,18 +55,14 @@ class Login extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 16,
+                height: 10,
               ),
-              SizedBox(
-                width: 150,
-                child: ElevatedButton(
-                  onPressed: () {
-                    signin(context: context)
-                        .then((value) => data.loaduserData());
-                  },
-                  child: const Text(
-                    'Login',
-                  ),
+              ElevatedButton(
+                onPressed: () async {
+                  signin(context: context);
+                },
+                child: const Text(
+                  'Login',
                 ),
               ),
               Row(
@@ -81,7 +77,7 @@ class Login extends StatelessWidget {
                             builder: (context) => Signup(),
                           ));
                     },
-                    child: Text(
+                    child: const Text(
                       'Sign up',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -98,17 +94,29 @@ class Login extends StatelessWidget {
   }
 
   Future signin({required BuildContext context}) async {
+    showDialog(
+      context: context,
+      builder: (context) => Center(child: CircularProgressIndicator()),
+    );
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-              email: emailcont.text, password: passcont.text)
-          .then((value) => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Dashbord(),
-              )));
+              email: emailcont.text.toLowerCase().trim(),
+              password: passcont.text)
+          .then((value) async {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        return Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider<DataProvider>(
+                create: (context) => DataProvider(),
+                child: Dashbord(),
+              ),
+            ));
+      });
       print('signin success');
     } catch (e) {
+      Navigator.of(context).pop();
       print(e);
     }
   }

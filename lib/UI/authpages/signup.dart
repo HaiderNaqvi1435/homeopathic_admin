@@ -28,13 +28,13 @@ class _SignupState extends State<Signup> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: 200,
-            width: 150,
-            // child: Image.asset(
-            //   'assert/signup.png',
-            //   fit: BoxFit.cover,
-            // ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 3,
+            width: double.maxFinite,
+            child: Image.asset(
+              'assets/sign.png',
+              fit: BoxFit.cover,
+            ),
           ),
           Modifiedtextfield(
             controller: name,
@@ -106,16 +106,34 @@ class _SignupState extends State<Signup> {
           //   },
           // ),
 
-          SizedBox(
-            width: 150,
-            child: ElevatedButton(
-              onPressed: () {
-                signupp();
-              },
-              child: const Text(
-                'Sign up',
-              ),
+          ElevatedButton(
+            onPressed: () {
+              signupp();
+            },
+            child: const Text(
+              'Sign up',
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Do not have an account?'),
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Login(),
+                      ));
+                },
+                child: const Text(
+                  'Sign up',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -124,14 +142,14 @@ class _SignupState extends State<Signup> {
 
   Future signupp() async {
     UserData userData = UserData(
-      email: email.text,
+      email: email.text.toLowerCase().trim(),
       name: name.text,
       cnic: cnic.text,
       phone: phoneno,
     );
     await FirebaseAuth.instance
         .createUserWithEmailAndPassword(
-            email: email.text, password: password.text)
+            email: email.text.toLowerCase().trim(), password: password.text)
         .then((value) async {
       FirebaseFirestore.instance
           .collection("UserData")

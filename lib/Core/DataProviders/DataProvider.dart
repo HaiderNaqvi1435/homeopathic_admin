@@ -8,10 +8,12 @@ import '../Models/MateriaData.dart';
 
 class DataProvider with ChangeNotifier {
   DataProvider() {
-    search();
     loaduserData();
+    search();
     loadremedy();
   }
+  UserData userData = UserData();
+
   loaduserData() async {
     FirebaseFirestore.instance
         .collection("UserData")
@@ -25,7 +27,6 @@ class DataProvider with ChangeNotifier {
     });
   }
 
-  UserData userData = UserData();
   List<RemedyData> remedylist = [];
   List<MateriaData> doctors = [];
   final materia = [
